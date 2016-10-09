@@ -153,6 +153,12 @@ system.time( result <- fitmodel(y,locs,maternIsotropic,numneighbors=30,fixedpara
 
 
 # see how long it takes to get estimates with exact likelihood    
+fixedparameters <- c(NA,NA,NA,1)
+notfixedinds <- which(is.na(fixedparameters))  # indices of parms to estimate
+linkfun <- list( function(x) log(x), function(x) log(x), function(x) log(x), function(x) log(x)/log(1-x) )
+invlinkfun <- list(function(x) exp(x),function(x) exp(x),function(x) exp(x), function(x) exp(x)/(1+exp(x)))
+startvals <- rep(0,4)
+
 f2 <- function(x){
     for(j in 1:length(notfixedinds)){
         covparms[notfixedinds[j]] <- invlinkfun[[notfixedinds[j]]](x[j])
