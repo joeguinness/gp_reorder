@@ -69,6 +69,7 @@ system.time(  ll2 <- orderedGroupCompLik(covparms,covfun,yord,locsord,NNlist)  )
 system.time( result <- fitmodel(y,X,locs,maternIsotropic,numneighbors=30,fixedparameters=c(1,NA,NA,1))  )
 
 
+
 # see how long it takes to get estimates with exact likelihood    
 fixedparameters <- c(NA,NA,NA,1)
 notfixedinds <- which(is.na(fixedparameters))  # indices of parms to estimate
